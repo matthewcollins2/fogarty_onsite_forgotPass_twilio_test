@@ -10,18 +10,19 @@ setup('create test user', async ({ page }) => {
 
   await page.getByRole('textbox', { name: 'First Name' }).fill('Matthew');
   await page.getByRole('textbox', { name: 'Last Name' }).fill('Collins');
+  await page.getByRole('textbox', { name: 'User ID' }).fill(`matthew-${Date.now()}`);
   await page.getByRole('textbox', { name: 'Email' }).fill(testEmail);
   await page.getByPlaceholder('Phone Number').fill('6155550100');
-  await page.getByRole('textbox', { name: 'Password' }).fill('TemporaryPass123!');
+  await page.getByRole('textbox', { name: 'Password' }).fill('TempPass123!!');
 
   await page.getByRole('textbox', { name: 'Street' }).fill('123 Main St');
   await page.getByRole('textbox', { name: 'City' }).fill('Sacramento');
-  await page.getByRole('textbox', { name: 'State (e.g., CA)' }).fill('CA');
+  await page.getByRole('combobox').click();
+  await page.getByRole('option', { name: 'CA' }).click();
   await page.getByRole('textbox', { name: 'ZIP Code' }).fill('95814');
 
-  const createButton = page.getByRole('button', { name: 'Create User' });
-  await expect(createButton).toBeEnabled();
-  await createButton.click();
+  await page.locator('div').filter({ hasText: /^Create User$/ }).click();
+
   // 3. Verify success
   await expect(page.getByText('Account created successfully')).toBeVisible();
 
