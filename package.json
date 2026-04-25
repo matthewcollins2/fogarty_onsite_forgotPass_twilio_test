@@ -17,7 +17,7 @@
     "serve": "node CRUD_mongoose.js",
     "server": "npx tsx CRUD_mongoose.js",
     "dev:test": "cross-env VITE_USE_EMULATOR=true vite",
-    "test:forgotPassword": "cross-env VITE_USE_EMULATOR=true firebase emulators:exec \"npx playwright test tests/forgotPassword.spec.js\" --only auth",
+    "test:forgotPassword": "cross-env VITE_USE_EMULATOR=true firebase emulators:exec \"npx playwright test tests/forgotPassword.spec.js --headed\" --only auth",
     "test:Twilio": "cd tests && node testTwilio.js +18777804236"
   },
   "keywords": [],

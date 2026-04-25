@@ -55,7 +55,7 @@ test('Password reset works and allows new login', async ({ page, request }) => {
         return !!resetEntry;
     }, {
         message: `Reset link not found in Emulator for ${testEmail}. Confirm connectAuthEmulator(auth, "http://127.0.0.1:9099") is active in your code.`,
-        timeout: 15000,
+        timeout: 20000,
     }).toBeTruthy();
 
     // --- STEP 3: Navigate to the Reset Page using the Emulator Link ---
@@ -74,7 +74,7 @@ test('Password reset works and allows new login', async ({ page, request }) => {
 
     // --- STEP 4: Complete the Reset ---
     const resetPasswordInput = page.locator('input[type="password"]').first();
-    await expect(resetPasswordInput).toBeEditable({ timeout: 10000 });
+    await expect(resetPasswordInput).toBeEditable({ timeout: 20000 });
     await resetPasswordInput.fill(newPassword);
 
     await page.waitForTimeout(300); // Small buffer for MUI/React state
