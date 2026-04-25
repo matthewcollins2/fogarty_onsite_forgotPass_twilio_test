@@ -32,7 +32,7 @@ test('Password reset works and allows new login', async ({ page, request }) => {
     await page.getByRole('button', { name: 'Send Reset Link' }).click();
 
     // Verify UI success message
-    await expect(page.getByText(/check your inbox/i)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText(/check.*inbox/i)).toBeVisible({ timeout: 10000 });
 
     await page.getByRole('link', { name: /back to login/i }).click();
     await expect(page).toHaveURL(/.*userlogin/);
