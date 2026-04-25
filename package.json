@@ -5,7 +5,7 @@
   "description": "",
   "main": "CRUD_mongoose.js",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite --host 127.0.0.1",
     "devCRUD": "nodemon CRUD_mongoose.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -15,7 +15,10 @@
     "test:quote": "node tests/requestQuote.selenium.mjs",
     "test:twilio": "node tests/testTwilio.js",
     "serve": "node CRUD_mongoose.js",
-    "server": "npx tsx CRUD_mongoose.js"
+    "server": "npx tsx CRUD_mongoose.js",
+    "dev:test": "cross-env VITE_USE_EMULATOR=true vite",
+    "test:forgotPassword": "cross-env VITE_USE_EMULATOR=true firebase emulators:exec \"npx playwright test tests/forgotPassword.spec.js\" --only auth",
+    "test:Twilio": "cd tests && node testTwilio.js +18777804236"
   },
   "keywords": [],
   "author": "",
@@ -30,12 +33,14 @@
     "@mui/system": "^7.3.5",
     "@mui/x-data-grid": "^8.27.0",
     "@mui/x-date-pickers": "^8.18.0",
+    "@trycourier/courier": "^7.10.2",
     "axios": "^1.13.1",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "chromedriver": "^146.0.6",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "courier": "^1.0.1",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
@@ -65,6 +70,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.1.4",
+    "cross-env": "^10.1.0",
     "nodemon": "^3.1.10",
     "vite": "^7.3.1"
   }

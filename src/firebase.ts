@@ -17,6 +17,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-//if (window.location.hostname === "localhost") {
-//connectAuthEmulator(auth, "http://127.0.0.1:9099");
-//}
+if (
+  import.meta.env.VITE_USE_EMULATOR === 'true' ||
+  window.location.hostname === '127.0.0.1' ||
+  window.location.hostname === 'localhost'
+) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+  console.log("Auth Emulator Connected");
+}
