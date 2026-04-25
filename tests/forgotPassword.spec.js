@@ -1,5 +1,14 @@
 import { test, expect } from '@playwright/test';
+import { defineConfig } from "@playwright/test";
 import fs from 'fs';
+
+export default defineConfig({
+    use: {
+        launchOptions: {
+            slowMo: 100,
+        },
+    },
+});
 
 // 1. Constants - Ensure ProjectID matches your firebase init
 const projectId = 'seniorproject191-cb9b5';
@@ -30,7 +39,7 @@ test('Password reset works and allows new login', async ({ page, request }) => {
     await page.goto('/forgot-password');
     await page.getByLabel('Email Address').fill(testEmail);
     await page.getByRole('button', { name: 'Send Reset Link' }).click();
-
+    await page.waitForTimeout(2000);
     // Verify UI success message
     await expect(page.getByText(/check.*inbox/i)).toBeVisible({ timeout: 10000 });
 
